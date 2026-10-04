@@ -6,17 +6,19 @@ const MusicPlayer = () => {
   const audioRef = useRef(null);
 
   useEffect(() => {
-    const audio = new Audio('/music/background.mp3');
+    const audio = new Audio(
+      `${process.env.PUBLIC_URL}/music/background.mp3`
+    );
+
     audio.loop = true;
     audioRef.current = audio;
 
-    // Try to start music automatically
     const startMusic = async () => {
       try {
         await audio.play();
         setIsPlaying(true);
       } catch (error) {
-        console.log('Autoplay was blocked by the browser.');
+        console.log('Autoplay blocked by browser.');
         setIsPlaying(false);
       }
     };
